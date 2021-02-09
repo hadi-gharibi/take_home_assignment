@@ -14,7 +14,7 @@ setup(
     package_dir={"": "main"},
     entry_points={"console_scripts": ["db_import=assignment.main:main"]},
     install_requires=[
-        "psycopg2==1.2.13",
+        "psycopg2==2.8.6",
     ],
     tests_require=[
         "pytest",
