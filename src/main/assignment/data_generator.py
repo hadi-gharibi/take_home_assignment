@@ -33,10 +33,3 @@ class User(object):
     
 
 
-if __name__ == "__main__":
-    c = User(1)
-    print(c.company_id)
-    print(c.company_size)
-    print(c.gen_rand_sessions(3))
-    print(c.subscription_fee)
-
