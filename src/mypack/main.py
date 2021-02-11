@@ -1,9 +1,18 @@
 from mypack.data_generator import User
 from mypack.tables import *
 from mypack.config.utils import config_parser
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formater = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
+file_handler = logging.FileHandler('main.log')
+file_handler.setFormatter(formater)
+logger.addHandler(file_handler)
 
 
-users = 500
+users = 10
 config_path = os.path.dirname(mypack.__file__ )+ '/config/database.ini'
 
 
@@ -22,7 +31,7 @@ def main(config_path = config_path):
 
         db_session.add_all([company_x, subscription_x])
         db_session.commit()
-
+        
         for month in range(1, 13):
             user_sessions_timestamp = user.gen_rand_sessions(month)
             if not user_sessions_timestamp: break
@@ -31,6 +40,8 @@ def main(config_path = config_path):
             
             db_session.add_all(user_sessions)
             db_session.commit()
+
+        logger.info(f'Created company #{user.company_id}. \n\tSize: {user.company_size} \n\tActivated period: {month} months')
 
 
 
